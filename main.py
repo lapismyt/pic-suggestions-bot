@@ -138,6 +138,9 @@ async def handle_admin_actions(callback: types.CallbackQuery):
             caption = f"👤 *{username}*\n\n{caption}"
             with open("ads.json", "r") as f:
                 ad_data = json.load(f)
+            me = await bot.get_me()
+            offer = f"[Предложить арт](https://t.me/{me.username})"
+            caption += f"\n\n{offer}"
             ad_text = f"[{random.choice(ad_data['phrases'])}]({ad_data['url']})"
             caption += f"\n\n{ad_text}"
             await bot.send_photo(chat_id=os.getenv("CHANNEL_ID"), photo=image_id, caption=caption, parse_mode="Markdown")
